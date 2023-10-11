@@ -144,6 +144,9 @@ const Profile = () => {
           alt="profile"
           className="rounded-full h-24 w-24 object-cover cursor-pointer self-center"
         />
+        <p className="px-2 text-xs text-slate-400">
+          last update at {new Date(currentUser.updatedAt).toLocaleString()}
+        </p>
         <p className="text-red-700 text-center">
           <span>{fileUploadError && fileUploadError}</span>
           <span className="text-green-700 ">

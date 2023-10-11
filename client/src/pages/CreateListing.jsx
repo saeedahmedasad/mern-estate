@@ -8,9 +8,11 @@ import React, { useEffect, useRef, useState } from "react";
 import { app } from "../firebase";
 import { useSelector } from "react-redux";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const CreateListing = () => {
   const [files, setFiles] = useState([]);
+  const navigate = useNavigate();
   const inputFilesRef = useRef(null);
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
@@ -37,7 +39,7 @@ const CreateListing = () => {
     e.preventDefault();
     try {
       const { data } = await axios.post("/api/listing/create", formData);
-      console.log(data);
+      navigate(`/listing/${data.listing._id}`);
     } catch (error) {
       console.log(error);
     }
@@ -270,7 +272,6 @@ const CreateListing = () => {
                 type="number"
                 id="regularPrice"
                 min={"1"}
-                max={"10"}
                 onChange={(e) => {
                   setRegularPrice(e.target.value);
                 }}
@@ -290,7 +291,6 @@ const CreateListing = () => {
                     setDiscountPrice(e.target.value);
                   }}
                   min={"1"}
-                  max={"10"}
                   required
                   className="p-3 border border-gray-300 rounded-lg"
                 />
